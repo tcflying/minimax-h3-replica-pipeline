@@ -1,0 +1,26 @@
+{
+ "A480": {
+  "dims": "480x864",
+  "status": "success",
+  "sec": 120,
+  "peak_vram_mib": 15952
+ },
+ "B540": {
+  "dims": "540x960",
+  "status": "success",
+  "sec": 150,
+  "peak_vram_mib": 15956
+ },
+ "C640": {
+  "dims": "640x1152",
+  "status": "success",
+  "sec": 240,
+  "peak_vram_mib": 15905
+ },
+ "D768": {
+  "dims": "768x1344",
+  "status": "success",
+  "sec": 360,
+  "peak_vram_mib": 17567
+ }
+}

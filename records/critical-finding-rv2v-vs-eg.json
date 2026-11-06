@@ -1,0 +1,22 @@
+{
+ "ts": "2026-11-06T04:41:00.881244",
+ "finding": "CRITICAL: Director rv2v/v2v source-video conditioning NEVER enters DiT on API-submitted workflows",
+ "evidence": [
+  "seg06: M-Turbo4/M-Pika6/M-Base25, rv2v/v2v ALL identical drift: frame0 empty -> hand-held product closeup; source has toddler from frame0",
+  "null-test (Reproduce <Video 1> exactly, refs=[]): output still hand-held closeup, color-hist cosine 0.24 vs source",
+  "conclusion: DiT latent path never receives source video; segs1-5 success = prior coincidence"
+ ],
+ "implication": "all 10 segments prior-driven not source-locked; draft is showcase-style not replica",
+ "next_moves_ranked": [
+  "1. Bypass Director: native comfy node MiniMaxH3ReferenceToVideo hand-built workflow (VHS_LoadVideo -> ReferenceToVideo direct)",
+  "2. Forensic read Director executor_core v2v branch to find drop point, then writer-agent patch",
+  "3. B2 local mask (needs master approval)"
+ ],
+ "assets": {
+  "segments": "gen/output/video/T4-* (prior-driven fallback)",
+  "draft": "gen/draft-480p-35s.mp4 840f/35.0s",
+  "inputs": "gen/input/",
+  "source": "gen/full-480x864-24fps.mp4"
+ },
+ "runtime": "ComfyUI 8193 alive via launch8193.py; opencv installed; pika adapter staged"
+}
