@@ -124,3 +124,7 @@ Video Rebirth 第三代：32B 蒸馏到 ~14B，默认 6 步 + INT8 量化，远�
 **N29 实测更新（2026-11-08）**：HyperFlow H3 Flash 14B Q4_K_M GGUF（8.6G）+ HyperFlowSigmas 6 步 + 原生 ReferenceToVideo 在 3090 跑通（120s/段/16.0G 峰值）。段 1 三帧与 ASR：台词干净；运动量 4.23（**全方案最贴源 3.74**）；但帧 60 构图相关 0.092（显著低于 32B 方案的 0.6）——14B 蒸馏在 R2V 任务上商品/主体锁定明显弱于 32B。**定位：t2v/i2v 通用加速好手；R2V 商品复刻主体保真不足**。连线坑：`HyperFlowGGUFLoader` 用 `unet_name` 非 `gguf`；`HyperFlowSigmas` 必须接 `model` 输入；原生 ReferenceToVideo 的 `ref_images/ref_videos` 槽在 API 提交中需传数组 `[["node",slot],...]`。
 
 **N29 8步补测（2026-11-09）**：8 步 vs 6 步——运动 3.45 vs 4.23、帧 60 构图相关 0.105 vs 0.092（差异不显著）、耗时 150s vs 120s。**8 步不改变 14B R2V 主体保真不足的结论**，32B 方案（A/B/C）仍是本案最优。
+
+## 十、素材需求清单（必须先收齐再开工）
+
+完整清单见 `ASSET-CHECKLIST.md`。核心原则：**商品参考图 5 个必须角度 + 穿着图 2 张 + 原对标视频**——缺任何必须项不开工。本案实测因缺鞋底特写和侧面 90° 图，导致成片底部纹路编造、侧面偶漂。
