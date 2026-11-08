@@ -106,3 +106,13 @@
 | Pika LoRA + res_multistep（简化配方） | ✅ 已测+终版实装 | 终版成片段 8/9 即此方案产出（ASR 逐词干净、seam 修复生效）。**音频关键段首选** |
 | Pika 官方六步精确配方（lcm+ManualSigmas 七点 renoise） | ❌ API 路径不可用 | 四轮 API 组装（输入名 vae/audio_vae/ref_images/ref_videos 修正、latent_image 链、sigma 末点 0.0001 变体）全部失败于 0.44 原生 `MiniMaxH3ReferenceToVideo` 内部错误 `Boolean value of Tensor is ambiguous`。Comfy-Org UI 模板本身是官方验证的——差异在 API 组装链（autogrow 槽多值语义待查）。**用 UI 导入官方模板可绕过** |
 | akhaliq Pika Turbo 融合 LoRA（2/4/8 步） | ❌ 未采用 | N28 实测 <6 步音频衰减；本仓 4 步画面档已由 ref2v_turbo v0.1 覆盖（更快且配套合同明确） |
+
+## 九、三版方案（全部保留，均为完整可交付成片）
+
+| 版 | 文件 | 配方 | 特点 | 适用 |
+|---|---|---|---|---|
+| **A** | `outputs/variants/A-final-ref2vturbo-pikaaudio.mp4` | ref2v_turbo v0.1 画面 + 段8/9 M-Pika 6步音频 | 构图最贴源（3段均值 0.612）、LoRA 仅 1.8G | 构图保真优先 |
+| **B** | `outputs/variants/B-akhaliqfull-oneshot.mp4` | akhaliq Turbo 全量 3.9G 4步一体到底 | 动态最活（6.23 vs 源 4.83）、生成最快（18.5min）、零返工 | 快速出片/动态优先（容忍 4 步音频微瑕） |
+| **C** | `outputs/variants/C-akhaliqfull-pikaaudio-hybrid.mp4` | B 画面 + 段1/7/8 M-Pika 音频替换 | 动态最优 + 音频零瑕疵，双优混合 | **默认推荐交付版** |
+
+三版同源同规格（840 帧/35.000s/960×544/24fps/立体声/同 seed）。A/C 音频链 whisper 逐词零瑕疵；B 有 N28 型 4 步衰减两处（seg01 叠词、seg7/8 间一句含糊）。全维度数据见 `records/version-compare.md`。
