@@ -98,3 +98,11 @@
 
 - 代码与工作流：MIT
 - `outputs/` 成片由本项目管线生成，商品图与源片为业务素材，不包含在本仓
+
+## 八、Pika 方案测试矩阵（2026-11-08 收口）
+
+| 方案 | 状态 | 结论 |
+|---|---|---|
+| Pika LoRA + res_multistep（简化配方） | ✅ 已测+终版实装 | 终版成片段 8/9 即此方案产出（ASR 逐词干净、seam 修复生效）。**音频关键段首选** |
+| Pika 官方六步精确配方（lcm+ManualSigmas 七点 renoise） | ❌ API 路径不可用 | 四轮 API 组装（输入名 vae/audio_vae/ref_images/ref_videos 修正、latent_image 链、sigma 末点 0.0001 变体）全部失败于 0.44 原生 `MiniMaxH3ReferenceToVideo` 内部错误 `Boolean value of Tensor is ambiguous`。Comfy-Org UI 模板本身是官方验证的——差异在 API 组装链（autogrow 槽多值语义待查）。**用 UI 导入官方模板可绕过** |
+| akhaliq Pika Turbo 融合 LoRA（2/4/8 步） | ❌ 未采用 | N28 实测 <6 步音频衰减；本仓 4 步画面档已由 ref2v_turbo v0.1 覆盖（更快且配套合同明确） |
