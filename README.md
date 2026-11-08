@@ -116,3 +116,9 @@
 | **C** | `outputs/variants/C-akhaliqfull-pikaaudio-hybrid.mp4` | B 画面 + 段1/7/8 M-Pika 音频替换 | 动态最优 + 音频零瑕疵，双优混合 | **默认推荐交付版** |
 
 三版同源同规格（840 帧/35.000s/960×544/24fps/立体声/同 seed）。A/C 音频链 whisper 逐词零瑕疵；B 有 N28 型 4 步衰减两处（seg01 叠词、seg7/8 间一句含糊）。全维度数据见 `records/version-compare.md`。
+
+## 十、HyperFlow H3 Flash（N29，2026-11-07 发布，待测）
+
+Video Rebirth 第三代：32B 蒸馏到 ~14B，默认 6 步 + INT8 量化，远景脸部改善。ComfyUI ≥0.43 + ComfyUI-GGUF + 官方 ComfyUI-HyperFlow-Flash 插件；GGUF Q4_K_M 约 9G 对 24G 显存友好；步数 4/6/8；支持 R2V。模型在官方网盘（教程未给直链，需后台回复获取）。
+
+**N29 实测更新（2026-11-08）**：HyperFlow H3 Flash 14B Q4_K_M GGUF（8.6G）+ HyperFlowSigmas 6 步 + 原生 ReferenceToVideo 在 3090 跑通（120s/段/16.0G 峰值）。段 1 三帧与 ASR：台词干净；运动量 4.23（**全方案最贴源 3.74**）；但帧 60 构图相关 0.092（显著低于 32B 方案的 0.6）——14B 蒸馏在 R2V 任务上商品/主体锁定明显弱于 32B。**定位：t2v/i2v 通用加速好手；R2V 商品复刻主体保真不足**。连线坑：`HyperFlowGGUFLoader` 用 `unet_name` 非 `gguf`；`HyperFlowSigmas` 必须接 `model` 输入；原生 ReferenceToVideo 的 `ref_images/ref_videos` 槽在 API 提交中需传数组 `[["node",slot],...]`。
